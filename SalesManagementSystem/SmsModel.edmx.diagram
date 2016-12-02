@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="703337d7b0864d49af348319f59bf98c" Name="Diagram1">
+        <EntityTypeShape EntityType="SMS_DBModel.T_M_AREA" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_M_CATEGORY" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_M_PERSON" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_M_PRODUCT" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_M_STORE" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_T_SALES_ORDR" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_T_SALES_ORDR_DETAIL" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_T_SALES_RTN" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMS_DBModel.T_T_SALES_RTN_DETAIL" Width="1.5" PointX="9.75" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_M_STORE_T_M_AREA" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_M_PRODUCT_T_M_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_M_STORE_T_M_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_ORDR_T_T_SALES_ORDR" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_RTN_T_T_SALES_ORDR" ManuallyRouted="false" />
+        <AssociationConnector Association="SMS_DBModel.FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

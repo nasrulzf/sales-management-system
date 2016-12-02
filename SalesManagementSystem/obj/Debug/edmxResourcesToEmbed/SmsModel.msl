@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SMS_DBModelStoreContainer" CdmEntityContainer="SMS_DBEntities">
+    <EntitySetMapping Name="T_M_AREA">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_M_AREA">
+        <MappingFragment StoreEntitySet="T_M_AREA">
+          <ScalarProperty Name="AR_ID" ColumnName="AR_ID" />
+          <ScalarProperty Name="AR_NAME" ColumnName="AR_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_M_CATEGORY">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_M_CATEGORY">
+        <MappingFragment StoreEntitySet="T_M_CATEGORY">
+          <ScalarProperty Name="CAT_ID" ColumnName="CAT_ID" />
+          <ScalarProperty Name="CAT_NAME" ColumnName="CAT_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_M_PERSON">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_M_PERSON">
+        <MappingFragment StoreEntitySet="T_M_PERSON">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_FIRST_NAME" ColumnName="P_FIRST_NAME" />
+          <ScalarProperty Name="P_LAST_NAME" ColumnName="P_LAST_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_M_PRODUCT">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_M_PRODUCT">
+        <MappingFragment StoreEntitySet="T_M_PRODUCT">
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+          <ScalarProperty Name="CAT_ID" ColumnName="CAT_ID" />
+          <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_M_STORE">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_M_STORE">
+        <MappingFragment StoreEntitySet="T_M_STORE">
+          <ScalarProperty Name="ST_ID" ColumnName="ST_ID" />
+          <ScalarProperty Name="ST_NAME" ColumnName="ST_NAME" />
+          <ScalarProperty Name="ST_AREA" ColumnName="ST_AREA" />
+          <ScalarProperty Name="ST_LOCATION" ColumnName="ST_LOCATION" />
+          <ScalarProperty Name="ST_PIC" ColumnName="ST_PIC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_T_SALES_ORDR">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_T_SALES_ORDR">
+        <MappingFragment StoreEntitySet="T_T_SALES_ORDR">
+          <ScalarProperty Name="SLS_ORDER_ID" ColumnName="SLS_ORDER_ID" />
+          <ScalarProperty Name="SLS_ORDER_DT" ColumnName="SLS_ORDER_DT" />
+          <ScalarProperty Name="SLS_DELIVERY_REQ_DT" ColumnName="SLS_DELIVERY_REQ_DT" />
+          <ScalarProperty Name="SLS_DELIVERY_DT" ColumnName="SLS_DELIVERY_DT" />
+          <ScalarProperty Name="STORE_ID" ColumnName="STORE_ID" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DT" ColumnName="CREATED_DT" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DT" ColumnName="UPDATED_DT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_T_SALES_ORDR_DETAIL">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_T_SALES_ORDR_DETAIL">
+        <MappingFragment StoreEntitySet="T_T_SALES_ORDR_DETAIL">
+          <ScalarProperty Name="DETAIL_ID" ColumnName="DETAIL_ID" />
+          <ScalarProperty Name="SLS_ORDER_ID" ColumnName="SLS_ORDER_ID" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="SLS_PRICE" ColumnName="SLS_PRICE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_T_SALES_RTN">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_T_SALES_RTN">
+        <MappingFragment StoreEntitySet="T_T_SALES_RTN">
+          <ScalarProperty Name="RTN_ORDER_ID" ColumnName="RTN_ORDER_ID" />
+          <ScalarProperty Name="SLS_ORDER_ID" ColumnName="SLS_ORDER_ID" />
+          <ScalarProperty Name="RTN_ORDER_DT" ColumnName="RTN_ORDER_DT" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_DT" ColumnName="CREATED_DT" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="UPDATED_DT" ColumnName="UPDATED_DT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_T_SALES_RTN_DETAIL">
+      <EntityTypeMapping TypeName="SMS_DBModel.T_T_SALES_RTN_DETAIL">
+        <MappingFragment StoreEntitySet="T_T_SALES_RTN_DETAIL">
+          <ScalarProperty Name="DETAIL_ID" ColumnName="DETAIL_ID" />
+          <ScalarProperty Name="RTN_ORDER_ID" ColumnName="RTN_ORDER_ID" />
+          <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="RTN_PRICE" ColumnName="RTN_PRICE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

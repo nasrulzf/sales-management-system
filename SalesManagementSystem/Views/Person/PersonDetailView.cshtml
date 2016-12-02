@@ -1,0 +1,55 @@
+﻿@model SalesManagementSystem.Models.PersonViewModel
+@using SalesManagementSystem
+
+<div class="row" id="mode_action">
+    <div class="col-md-1 col-md-offset-9">
+        <button type="button" onclick="psf.goCreate()" class="btn btn-md btn-default">Create</button>
+    </div>
+    <div class="col-md-1">
+        <button type="button" onclick="psf.doEdit()" class="btn btn-md btn-default">Edit</button>
+    </div>
+    <div class="col-md-0">
+        <button type="button" class="btn btn-md btn-default">Delete</button>
+    </div>
+</div>
+<div class="row" id="execute_action">
+    <div class="col-md-1 col-md-offset-10">
+        <button type="button" onclick="psf.doSave('update')" class="btn btn-md btn-primary">Save</button>
+    </div>
+    <div class="col-md-0">
+        <button type="button" onclick="psf.goBack()" class="btn btn-md btn-danger">Cancel</button>
+    </div>
+</div>
+<div class="row">
+    <hr />
+    <div id="data-table" class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model != null && Model.Lists.Count() > 0)
+                {
+                    foreach (T_M_PERSON person in Model.Lists)
+                    {
+                        <tr onclick="psf.doSelect(this)">
+                            <td data-type="hidden" data-name="Dto.P_ID">@person.P_ID</td>
+                            <td data-type="text"   data-name="Dto.P_FIRST_NAME">@person.P_FIRST_NAME</td>
+                            <td data-type="text"   data-name="Dto.P_LAST_NAME">@person.P_LAST_NAME</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3">No Record</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿
+@using SalesManagementSystem.Models
+
+<div class="row">
+    <div class="col-md-1 col-md-offset-10">
+        <button type="button" onclick="psf.doSave('create')" class="btn btn-md btn-primary">Save</button>
+    </div>
+    <div class="col-md-0">
+        <button type="button" onclick="psf.goBack()" class="btn btn-md btn-danger">Cancel</button>
+    </div>
+</div>
+<div class="row">
+    <hr />
+    <div class="col-md-12">
+        @if (Model.error != null && Model.error.Count > 0)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (ErrorModel err in Model.error)
+                    {
+                        <li>@err.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="col-md-12">
+        <div class="row row-form">
+            <div class="col-md-6">First Name</div>
+            <div class="col-md-6"><input type="text" class="form-control" name="Dto.P_FIRST_NAME" /></div>
+        </div>
+        <div class="row row-form">
+            <div class="col-md-6">Last Name Name</div>
+            <div class="col-md-6"><input type="text" class="form-control" name="Dto.P_LAST_NAME" /></div>
+        </div>
+    </div>
+</div>

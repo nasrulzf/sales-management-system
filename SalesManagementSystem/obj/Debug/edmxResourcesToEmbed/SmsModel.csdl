@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMS_DBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="T_M_AREA">
+    <Key>
+      <PropertyRef Name="AR_ID" />
+    </Key>
+    <Property Name="AR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AR_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="T_M_STORE" Relationship="Self.FK_T_M_STORE_T_M_AREA" FromRole="T_M_AREA" ToRole="T_M_STORE" />
+  </EntityType>
+  <EntityType Name="T_M_CATEGORY">
+    <Key>
+      <PropertyRef Name="CAT_ID" />
+    </Key>
+    <Property Name="CAT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CAT_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="T_M_PRODUCT" Relationship="Self.FK_T_M_PRODUCT_T_M_CATEGORY" FromRole="T_M_CATEGORY" ToRole="T_M_PRODUCT" />
+  </EntityType>
+  <EntityType Name="T_M_PERSON">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="P_FIRST_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="P_LAST_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="T_M_STORE" Relationship="Self.FK_T_M_STORE_T_M_PERSON" FromRole="T_M_PERSON" ToRole="T_M_STORE" />
+  </EntityType>
+  <EntityType Name="T_M_PRODUCT">
+    <Key>
+      <PropertyRef Name="PRODUCT_ID" />
+    </Key>
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRODUCT_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CAT_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="T_M_CATEGORY" Relationship="Self.FK_T_M_PRODUCT_T_M_CATEGORY" FromRole="T_M_PRODUCT" ToRole="T_M_CATEGORY" />
+    <NavigationProperty Name="T_T_SALES_ORDR_DETAIL" Relationship="Self.FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT" FromRole="T_M_PRODUCT" ToRole="T_T_SALES_ORDR_DETAIL" />
+    <NavigationProperty Name="T_T_SALES_RTN_DETAIL" Relationship="Self.FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT" FromRole="T_M_PRODUCT" ToRole="T_T_SALES_RTN_DETAIL" />
+  </EntityType>
+  <EntityType Name="T_M_STORE">
+    <Key>
+      <PropertyRef Name="ST_ID" />
+    </Key>
+    <Property Name="ST_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ST_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ST_AREA" Type="Int32" Nullable="false" />
+    <Property Name="ST_LOCATION" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ST_PIC" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="T_M_AREA" Relationship="Self.FK_T_M_STORE_T_M_AREA" FromRole="T_M_STORE" ToRole="T_M_AREA" />
+    <NavigationProperty Name="T_M_PERSON" Relationship="Self.FK_T_M_STORE_T_M_PERSON" FromRole="T_M_STORE" ToRole="T_M_PERSON" />
+    <NavigationProperty Name="T_T_SALES_ORDR" Relationship="Self.FK_T_T_SALES_ORDR_T_T_SALES_ORDR" FromRole="T_M_STORE" ToRole="T_T_SALES_ORDR" />
+  </EntityType>
+  <EntityType Name="T_T_SALES_ORDR">
+    <Key>
+      <PropertyRef Name="SLS_ORDER_ID" />
+    </Key>
+    <Property Name="SLS_ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SLS_ORDER_DT" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SLS_DELIVERY_REQ_DT" Type="DateTime" Precision="3" />
+    <Property Name="SLS_DELIVERY_DT" Type="DateTime" Precision="3" />
+    <Property Name="STORE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_DT" Type="DateTime" Precision="3" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="UPDATED_DT" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="T_M_STORE" Relationship="Self.FK_T_T_SALES_ORDR_T_T_SALES_ORDR" FromRole="T_T_SALES_ORDR" ToRole="T_M_STORE" />
+    <NavigationProperty Name="T_T_SALES_ORDR_DETAIL" Relationship="Self.FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR" FromRole="T_T_SALES_ORDR" ToRole="T_T_SALES_ORDR_DETAIL" />
+    <NavigationProperty Name="T_T_SALES_RTN" Relationship="Self.FK_T_T_SALES_RTN_T_T_SALES_ORDR" FromRole="T_T_SALES_ORDR" ToRole="T_T_SALES_RTN" />
+  </EntityType>
+  <EntityType Name="T_T_SALES_ORDR_DETAIL">
+    <Key>
+      <PropertyRef Name="DETAIL_ID" />
+    </Key>
+    <Property Name="DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SLS_ORDER_ID" Type="Int32" Nullable="false" />
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" />
+    <Property Name="QTY" Type="Int32" Nullable="false" />
+    <Property Name="SLS_PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="T_M_PRODUCT" Relationship="Self.FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT" FromRole="T_T_SALES_ORDR_DETAIL" ToRole="T_M_PRODUCT" />
+    <NavigationProperty Name="T_T_SALES_ORDR" Relationship="Self.FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR" FromRole="T_T_SALES_ORDR_DETAIL" ToRole="T_T_SALES_ORDR" />
+  </EntityType>
+  <EntityType Name="T_T_SALES_RTN">
+    <Key>
+      <PropertyRef Name="RTN_ORDER_ID" />
+    </Key>
+    <Property Name="RTN_ORDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SLS_ORDER_ID" Type="Int32" Nullable="false" />
+    <Property Name="RTN_ORDER_DT" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_DT" Type="DateTime" Precision="3" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="UPDATED_DT" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="T_T_SALES_ORDR" Relationship="Self.FK_T_T_SALES_RTN_T_T_SALES_ORDR" FromRole="T_T_SALES_RTN" ToRole="T_T_SALES_ORDR" />
+    <NavigationProperty Name="T_T_SALES_RTN_DETAIL" Relationship="Self.FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN" FromRole="T_T_SALES_RTN" ToRole="T_T_SALES_RTN_DETAIL" />
+  </EntityType>
+  <EntityType Name="T_T_SALES_RTN_DETAIL">
+    <Key>
+      <PropertyRef Name="DETAIL_ID" />
+    </Key>
+    <Property Name="DETAIL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RTN_ORDER_ID" Type="Int32" Nullable="false" />
+    <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" />
+    <Property Name="QTY" Type="Int32" Nullable="false" />
+    <Property Name="RTN_PRICE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="T_M_PRODUCT" Relationship="Self.FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT" FromRole="T_T_SALES_RTN_DETAIL" ToRole="T_M_PRODUCT" />
+    <NavigationProperty Name="T_T_SALES_RTN" Relationship="Self.FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN" FromRole="T_T_SALES_RTN_DETAIL" ToRole="T_T_SALES_RTN" />
+  </EntityType>
+  <Association Name="FK_T_M_STORE_T_M_AREA">
+    <End Role="T_M_AREA" Type="Self.T_M_AREA" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="T_M_STORE" Type="Self.T_M_STORE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_AREA">
+        <PropertyRef Name="AR_ID" />
+      </Principal>
+      <Dependent Role="T_M_STORE">
+        <PropertyRef Name="ST_AREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_M_PRODUCT_T_M_CATEGORY">
+    <End Role="T_M_CATEGORY" Type="Self.T_M_CATEGORY" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="T_M_PRODUCT" Type="Self.T_M_PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_CATEGORY">
+        <PropertyRef Name="CAT_ID" />
+      </Principal>
+      <Dependent Role="T_M_PRODUCT">
+        <PropertyRef Name="CAT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_M_STORE_T_M_PERSON">
+    <End Role="T_M_PERSON" Type="Self.T_M_PERSON" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="T_M_STORE" Type="Self.T_M_STORE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_PERSON">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="T_M_STORE">
+        <PropertyRef Name="ST_PIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT">
+    <End Role="T_M_PRODUCT" Type="Self.T_M_PRODUCT" Multiplicity="1" />
+    <End Role="T_T_SALES_ORDR_DETAIL" Type="Self.T_T_SALES_ORDR_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_PRODUCT">
+        <PropertyRef Name="PRODUCT_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_ORDR_DETAIL">
+        <PropertyRef Name="PRODUCT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT">
+    <End Role="T_M_PRODUCT" Type="Self.T_M_PRODUCT" Multiplicity="1" />
+    <End Role="T_T_SALES_RTN_DETAIL" Type="Self.T_T_SALES_RTN_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_PRODUCT">
+        <PropertyRef Name="PRODUCT_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_RTN_DETAIL">
+        <PropertyRef Name="PRODUCT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_ORDR_T_T_SALES_ORDR">
+    <End Role="T_M_STORE" Type="Self.T_M_STORE" Multiplicity="1" />
+    <End Role="T_T_SALES_ORDR" Type="Self.T_T_SALES_ORDR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_M_STORE">
+        <PropertyRef Name="ST_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_ORDR">
+        <PropertyRef Name="STORE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR">
+    <End Role="T_T_SALES_ORDR" Type="Self.T_T_SALES_ORDR" Multiplicity="1" />
+    <End Role="T_T_SALES_ORDR_DETAIL" Type="Self.T_T_SALES_ORDR_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_T_SALES_ORDR">
+        <PropertyRef Name="SLS_ORDER_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_ORDR_DETAIL">
+        <PropertyRef Name="SLS_ORDER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_RTN_T_T_SALES_ORDR">
+    <End Role="T_T_SALES_ORDR" Type="Self.T_T_SALES_ORDR" Multiplicity="1" />
+    <End Role="T_T_SALES_RTN" Type="Self.T_T_SALES_RTN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_T_SALES_ORDR">
+        <PropertyRef Name="SLS_ORDER_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_RTN">
+        <PropertyRef Name="SLS_ORDER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN">
+    <End Role="T_T_SALES_RTN" Type="Self.T_T_SALES_RTN" Multiplicity="1" />
+    <End Role="T_T_SALES_RTN_DETAIL" Type="Self.T_T_SALES_RTN_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_T_SALES_RTN">
+        <PropertyRef Name="RTN_ORDER_ID" />
+      </Principal>
+      <Dependent Role="T_T_SALES_RTN_DETAIL">
+        <PropertyRef Name="RTN_ORDER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SMS_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="T_M_AREA" EntityType="Self.T_M_AREA" />
+    <EntitySet Name="T_M_CATEGORY" EntityType="Self.T_M_CATEGORY" />
+    <EntitySet Name="T_M_PERSON" EntityType="Self.T_M_PERSON" />
+    <EntitySet Name="T_M_PRODUCT" EntityType="Self.T_M_PRODUCT" />
+    <EntitySet Name="T_M_STORE" EntityType="Self.T_M_STORE" />
+    <EntitySet Name="T_T_SALES_ORDR" EntityType="Self.T_T_SALES_ORDR" />
+    <EntitySet Name="T_T_SALES_ORDR_DETAIL" EntityType="Self.T_T_SALES_ORDR_DETAIL" />
+    <EntitySet Name="T_T_SALES_RTN" EntityType="Self.T_T_SALES_RTN" />
+    <EntitySet Name="T_T_SALES_RTN_DETAIL" EntityType="Self.T_T_SALES_RTN_DETAIL" />
+    <AssociationSet Name="FK_T_M_STORE_T_M_AREA" Association="Self.FK_T_M_STORE_T_M_AREA">
+      <End Role="T_M_AREA" EntitySet="T_M_AREA" />
+      <End Role="T_M_STORE" EntitySet="T_M_STORE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_M_PRODUCT_T_M_CATEGORY" Association="Self.FK_T_M_PRODUCT_T_M_CATEGORY">
+      <End Role="T_M_CATEGORY" EntitySet="T_M_CATEGORY" />
+      <End Role="T_M_PRODUCT" EntitySet="T_M_PRODUCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_M_STORE_T_M_PERSON" Association="Self.FK_T_M_STORE_T_M_PERSON">
+      <End Role="T_M_PERSON" EntitySet="T_M_PERSON" />
+      <End Role="T_M_STORE" EntitySet="T_M_STORE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT" Association="Self.FK_T_T_SALES_ORDR_DETAIL_T_M_PRODUCT">
+      <End Role="T_M_PRODUCT" EntitySet="T_M_PRODUCT" />
+      <End Role="T_T_SALES_ORDR_DETAIL" EntitySet="T_T_SALES_ORDR_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT" Association="Self.FK_T_T_SALES_RTN_DETAIL_T_M_PRODUCT">
+      <End Role="T_M_PRODUCT" EntitySet="T_M_PRODUCT" />
+      <End Role="T_T_SALES_RTN_DETAIL" EntitySet="T_T_SALES_RTN_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_ORDR_T_T_SALES_ORDR" Association="Self.FK_T_T_SALES_ORDR_T_T_SALES_ORDR">
+      <End Role="T_M_STORE" EntitySet="T_M_STORE" />
+      <End Role="T_T_SALES_ORDR" EntitySet="T_T_SALES_ORDR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR" Association="Self.FK_T_T_SALES_ORDR_DETAIL_T_T_SALES_ORDR">
+      <End Role="T_T_SALES_ORDR" EntitySet="T_T_SALES_ORDR" />
+      <End Role="T_T_SALES_ORDR_DETAIL" EntitySet="T_T_SALES_ORDR_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_RTN_T_T_SALES_ORDR" Association="Self.FK_T_T_SALES_RTN_T_T_SALES_ORDR">
+      <End Role="T_T_SALES_ORDR" EntitySet="T_T_SALES_ORDR" />
+      <End Role="T_T_SALES_RTN" EntitySet="T_T_SALES_RTN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN" Association="Self.FK_T_T_SALES_RTN_DETAIL_T_T_SALES_RTN">
+      <End Role="T_T_SALES_RTN" EntitySet="T_T_SALES_RTN" />
+      <End Role="T_T_SALES_RTN_DETAIL" EntitySet="T_T_SALES_RTN_DETAIL" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

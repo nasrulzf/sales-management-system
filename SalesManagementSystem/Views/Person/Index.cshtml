@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Person";
+}
+
+<div class="row">&nbsp;</div>
+<div id="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Filter By</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">@Html.Label("Search.P_FIRST_NAME", "First Name")</div>
+                                <div class="col-md-8"><input type="text" class="form-control" name="Search.P_FIRST_NAME" /></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">@Html.Label("Search.P_LAST_NAME", "Last Name")</div>
+                                <div class="col-md-8"><input type="text" class="form-control" name="Search.P_LAST_NAME" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr />
+                        <div class="col-md-12">
+                            <div class="col-md-1 col-md-offset-10">
+                                <button type="button" onclick="psf.doSearch()" class="btn btn-md btn-default">Search</button>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-md btn-default">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body" id="content-display">
+                    @RenderPage("PersonDetailView.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+    var PersonForm = function () {
+
+        this.doSearch = function () {
+
+            var searchFirstName = $('[name=Search\\.P_FIRST_NAME]').val();
+            var searchLastName = $('[name=Search\\.P_LAST_NAME]').val();
+
+            $.post('@( Url.Action("Search", "Person", null) )'
+            , {
+                'Search.P_FIRST_NAME': searchFirstName,
+                'Search.P_LAST_NAME': searchLastName
+            }
+            , function (e) {
+                $('#content-display').html(e);
+                $('#execute_action').hide();
+                $('#mode_action').show();
+            });
+
+
+
+
+        }
+
+        this.doSelect = function (event) {
+            // debugger di doSelect
+
+            $('#data-table').find('tr').each(function (e, t) {
+                $(t).removeClass('bg-info');
+                $(t).data('active', 'false');
+            });
+
+            $(event).data('active', 'true');
+            $(event).addClass('bg-info');
+
+
+        }
+
+        this.doEdit = function () {
+
+            var tr = $('#data-table').find('tr.bg-info');
+
+            if (tr.length == 0) {
+                alert('Please select a record');
+                return;
+            }
+
+            tr.find('td').each(function (e, t) {
+                debugger;
+                if ($(t).data('type') == 'text') {
+                    var name = $(t).data('name');
+                    var val = $(t).html();
+                    $(t).html('<input type="text" class="form-control" name="' + name + '" value="' + val + '" /> ');
+                }
+                else if ($(t).data('type') == 'hidden') {
+                    var name = $(t).data('name');
+                    var val = $(t).html();
+                    $(t).html(val + '<input type="hidden" class="form-control" name="' + name + '" value="' + val + '" /> ');
+                }
+            });
+
+            $('#mode_action').hide();
+            $('#execute_action').show();
+
+        }
+
+        this.doSave = function (mode) {
+
+            var dataPost = {};
+            var url = '';
+
+            var firstName = $('[name=Dto\\.P_FIRST_NAME]').val();
+            var lastName = $('[name=Dto\\.P_LAST_NAME]').val();
+
+            if (mode === 'create') {
+                url = '@Url.Action("Add", "Person")';
+                    dataPost = {
+                        'dto.P_FIRST_NAME': firstName,
+                        'dto.P_LAST_NAME': lastName
+                    };
+                } else if (mode === 'update') {
+                    url = '@Url.Action("Edit", "Person")';
+                    dataPost = {
+                        'dto.P_ID': $('[name=Dto\\.P_ID]').val(),
+                        'dto.P_FIRST_NAME': firstName,
+                        'dto.P_LAST_NAME': lastName
+                    };
+                }
+
+                $.post(url, dataPost, function (e) {
+                    if (e.status == "1") {
+                        alert('New Record saved');
+                        this.goBack();
+                    } else if (e.status == "0") {
+                        // debugger di Error Update
+                        debugger;
+                    }else {
+                        $('#content-display').html(e);
+                    }
+                }.bind(this));
+
+            }
+
+            this.goCreate = function () {
+
+                var searchFirstName = $('[name=Search\\.P_FIRST_NAME]').val();
+                var searchLastName = $('[name=Search\\.P_LAST_NAME]').val();
+
+                $.post('@(Url.Action("Add", "Person", null))'
+                , {
+                    'Search.P_FIRST_NAME': searchFirstName,
+                    'Search.P_LAST_NAME': searchLastName
+                }
+                , function (e) {
+                    $('#content-display').html(e);
+                });
+        }
+
+        this.goBack = function () {
+            $.post('@(Url.Action("GoBack", "Person", null))'
+            , null
+            , function (e) {
+                $('#content-display').html(e);
+                $('#content-display').html(e);
+                $('#execute_action').hide();
+            });
+        }
+    }
+
+    var psf = new PersonForm();
+
+    psf.doSearch();
+
+    </script>
+}
